@@ -11,7 +11,8 @@ namespace MinimalWordReminderApi
         }
         public MinimalDbContext(DbContextOptions<MinimalDbContext> options):base(options) { }
 
-		public DbSet<Word> Words { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Word> Words { get; set; }
 		public DbSet<WordType> WordTypes { get; set; }
 	}
 }
