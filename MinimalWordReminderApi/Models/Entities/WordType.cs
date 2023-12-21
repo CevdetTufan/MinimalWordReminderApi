@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MinimalWordReminderApi.Models.Entities
 {
@@ -8,9 +7,7 @@ namespace MinimalWordReminderApi.Models.Entities
 		public int Id { get; set; }
 
 
-		[Required, StringLength(maximumLength: 200)]
+		[Required, StringLength(maximumLength: 200)]	
 		public string Name { get; set; }
-
-		public virtual ICollection<Word> Words { get; set; }
 	}
 }

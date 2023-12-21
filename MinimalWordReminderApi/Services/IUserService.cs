@@ -8,7 +8,5 @@ namespace MinimalWordReminderApi.Services
 	public interface IUserService
 	{
 		Task<TokenResponseModel> Login(UserLoginPostModel model);
-
-		List<User> GetUsers();
 	}
 }

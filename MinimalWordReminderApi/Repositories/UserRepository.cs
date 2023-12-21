@@ -15,7 +15,7 @@ namespace MinimalWordReminderApi.Repositories
 			this.context = context;
 		}
 
-		public async Task<User?> Login(UserLoginPostModel model)
+		public async Task<User> Login(UserLoginPostModel model)
 		{
 			return await context.Users
 				.Where(q => q.Username == model.Username && q.Password == model.Password)

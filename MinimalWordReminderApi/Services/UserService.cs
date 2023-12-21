@@ -24,11 +24,6 @@ namespace MinimalWordReminderApi.Services
 			this.configuration = configuration;
 		}
 
-		public List<User> GetUsers()
-		{
-			return userRepository.GetAll(q => q.Username != "a").ToList();
-		}
-
 		public async Task<TokenResponseModel> Login(UserLoginPostModel model)
 		{
 			var user = await userRepository.Login(model);

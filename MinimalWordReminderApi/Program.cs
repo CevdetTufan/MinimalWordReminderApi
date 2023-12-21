@@ -20,7 +20,9 @@ var builder = WebApplication.CreateBuilder(args);
 var connSting = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<MinimalDbContext>(opt => opt.UseSqlServer(connSting));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IWordRepository, WordRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IWordService, WordService>();
 
 builder.Services.AddEndpointsApiExplorer();
 
@@ -98,15 +100,6 @@ app.UseAuthorization();
 
 app.MapGet("/", () => "Merhaba Minimal API!").RequireAuthorization();
 
-app.MapGet("/word/get{id}",
-	async (MinimalDbContext db, int id) =>
-	await db.Words.FindAsync(id))
-	.RequireAuthorization();
-
-app.MapGet("/word/list", async (MinimalDbContext db) => await db.Words.ToListAsync())
-	.RequireAuthorization("admin_greetings");
-
-app.MapGet("/user/list", (IUserService db) => db.GetUsers());
 
 app.MapPost("/auth/login", async (IUserService db, [FromBody] UserLoginPostModel model) =>
 {
@@ -120,6 +113,18 @@ app.MapPost("/auth/login", async (IUserService db, [FromBody] UserLoginPostModel
 		return Results.Unauthorized();
 	}
 });
+
+app.MapPost("/word/add", (IWordService service, [FromBody] WordPostModel model) =>
+{
+	try
+	{
+		return Results.Ok(service.Add(model));
+	}
+	catch
+	{
+		return Results.Problem("Hata Meydana Geldi", statusCode: 500);
+	}
+}).RequireAuthorization();
 
 
 app.Run();

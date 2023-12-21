@@ -6,6 +6,6 @@ namespace MinimalWordReminderApi.Repositories
 {
 	public interface IUserRepository : IRepository<User, int>
 	{
-		Task<User?> Login(UserLoginPostModel model);
+		Task<User> Login(UserLoginPostModel model);
 	}
 }

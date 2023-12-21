@@ -56,9 +56,9 @@ namespace MinimalWordReminderApi.Repositories
 			return dbSet.Find(id);
 		}
 
-		public void Insert(TEntity entity)
+		public TEntity Insert(TEntity entity)
 		{
-			dbSet.Add(entity);
+			return dbSet.Add(entity).Entity;
 		}
 
 		public void Update(TEntity entity)
@@ -84,6 +84,16 @@ namespace MinimalWordReminderApi.Repositories
 		public async Task InsertAsync(TEntity entity)
 		{
 			await dbSet.AddAsync(entity);
+		}
+
+		public int SaveChanges()
+		{
+			return context.SaveChanges();
+		}
+
+		public async Task<int> SaveChangesAsync()
+		{
+			return await context.SaveChangesAsync();
 		}
 	}
 }

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MinimalWordReminderApi;
 
@@ -10,9 +11,11 @@ using MinimalWordReminderApi;
 namespace MinimalWordReminderApi.Migrations
 {
     [DbContext(typeof(MinimalDbContext))]
-    partial class MinimalDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231221182533_word")]
+    partial class word
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,9 +57,6 @@ namespace MinimalWordReminderApi.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Name")
-                        .IsUnique();
 
                     b.ToTable("Words");
                 });
